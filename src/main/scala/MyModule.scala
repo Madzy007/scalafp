@@ -49,7 +49,7 @@ object MyModule {
     loop(0)
   }
 
-  def curry[A,B,C](f: (A, B) => C): A => (B => C) = {
+  def curry[A,B,C](f: (A, B) => C): A => B => C = {
     a => b => f(a,b)
   }
 
@@ -61,12 +61,32 @@ object MyModule {
     a => f(g(a))
   }
 
+  def ascendingOrderInt(x: Int, y: Int): Boolean = {
+    x < y
+  }
+
+  def descendingOrderInt(x: Int, y: Int): Boolean = {
+    x > y
+  }
+
+  def ascendingOrderString(x: String, y: String): Boolean = {
+    x < y
+  }
+
+  def descendingOrderString(x: String, y: String): Boolean = {
+    x > y
+  }
+
+  def p[X](x: X): X => Boolean = x == _
+
   def main(args: Array[String]): Unit = {
-    println(formatResult("absolute value", -2, abs))
+    println(formatResult("absolute value", 50, abs))
     println(formatResult("factorial value", 9, factorial))
     println(formatResult("fibonacci value", 9, fibonacci))
-    println(findFirst(Array(1,3,4), (x: Int) => x == 4))
-    println(isSorted(Array(1,4,5), (x: Int, y: Int) => x < y))
+    println(findFirst(Array(1,3,4), p(5)))
+    println(findFirst(Array('1','3','4'), p('5')))
+    println(isSorted(Array(1,4,5), ascendingOrderInt))
+    println(isSorted(Array(1,4,5), descendingOrderInt))
 
   }
 

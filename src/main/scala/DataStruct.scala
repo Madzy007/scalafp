@@ -22,4 +22,15 @@ object List {
     else Cons(as.head, apply(as.tail: _*))
   }
 
+  def tail[A](tail: List[A]): List[A] = tail match {
+    case Nil => sys.error("Tail of empty list")
+    case Cons(_, tail) => tail
+  }
+
+  def setHead[A](head: A, tail: List[A]): List[A] = tail match {
+    case Nil => sys.error("setHead called on empty list")
+    case Cons(_, tail) => Cons(head, tail)
+  }
+
+
 }
